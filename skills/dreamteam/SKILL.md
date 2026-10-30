@@ -11,7 +11,7 @@ The front door for Dreamteam in Claude. It does four things:
 3. Picks the right skill for a vague ask, and runs it without announcing the hop.
 4. Says plainly when something isn't supported.
 
-Specific asks ("brief me", "prep me for…", "show me <one record>", "follow up with…", "how's my pipeline", "update…") go straight to their own skill. This skill doesn't sit in front of them. *show all tasks*, *show overdue*, *show all deals*, *show gaps* and *show all contacts* stay with the skill that showed the list; when that's unclear, daily-brief for tasks and overdue, pipeline-health for deals and gaps, view-record for contacts.
+Specific asks ("brief me", "prep me for…", "show me <one record>", "follow up with…", "how's my pipeline", "update…", "add a contact…") go straight to their own skill. This skill doesn't sit in front of them. *show all tasks*, *show overdue*, *show all deals*, *show gaps* and *show all contacts* stay with the skill that showed the list; when that's unclear, daily-brief for tasks and overdue, pipeline-health for deals and gaps, view-record for contacts.
 
 Before reading any Dreamteam data, read these files in this skill's folder and follow them:
 - `references/reading-dreamteam.md`: how to read Dreamteam (setup check, no links, payload discipline, and "Dreamteam's own content first").
@@ -19,7 +19,7 @@ Before reading any Dreamteam data, read these files in this skill's folder and f
 
 ## Ground rules
 
-- **This skill never changes Dreamteam.** Every change request goes to the update record skill (section 5), which shows the change and asks for a yes.
+- **This skill never changes Dreamteam.** Every change request goes to the update record skill, and every new contact, company or deal to the create record skill (section 5). Both show the change and ask for a yes.
 - **Never guess.** Every number, name and date comes from a Dreamteam record read in this chat. If it can't be read, say so.
 - **Record names are plain text, never links** (`reading-dreamteam.md`, Before you start, step 2).
 - Never name Dreamteam's assistants (Sally, Rachel, Raj). No record ids, field names or UTC times on screen.
@@ -41,6 +41,7 @@ Make no Dreamteam calls. Reply with exactly this text, in plain Markdown:
 | "How's my pipeline?" | Your commit and the deals to act on this week, with the next step for each |
 | "Move the close date on [deal] to [date]" | The change laid out for you, saved to Dreamteam once you confirm |
 | "Just spoke with [contact]…" | A note, deal changes and a follow-up task, saved once you confirm |
+| "Add [person] from [company] as a contact", or a photo of a business card | The new contact (and company) laid out for you, saved once you confirm |
 ---
 
 - Leave out a row whose skill is not installed in this plugin.
@@ -59,7 +60,8 @@ When the ask is vague or has no clear skill, pick one from this table and run it
 | One deal, account or contact ("help with [account]", "anything on [deal]?") | view-record |
 | To write or send an email to a buyer ("send the follow-up to…") | draft-email (it drafts; nothing is sent) |
 | How their or the team's pipeline looks, forecast | pipeline-health |
-| To change, add, log or mark something | update-record |
+| To change, add, log or mark something on a record that exists | update-record |
+| To add a new contact, company or deal, or save a business card | create-record |
 
 - **Two skills fit** (for example just a company name, and the rep has a meeting with them today): run view-record, and offer *prep me for [name]* as its **What next?** action.
 - **Several records match a name:** show up to 5 as one compact list (name, owner, stage or company) and ask which one.
@@ -86,7 +88,7 @@ When the rep types an action from text-kit's action table ("The only actions a s
 
 ## 5. Changes
 
-Any ask to update, change, set, move, add a note, log a call, remind, mark done or snooze goes to the update-record skill with the rep's words as they are. This skill never calls a tool that creates, updates or deletes.
+Any ask to update, change, set, move, add a note, log a call, remind, mark done or snooze goes to the update-record skill with the rep's words as they are. Any ask to add a new contact, company or deal, or to save a business card, signature or profile, goes to the create-record skill the same way. This skill never calls a tool that creates, updates or deletes.
 
 ## 6. Not supported
 

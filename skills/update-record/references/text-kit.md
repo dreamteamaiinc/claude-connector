@@ -47,7 +47,7 @@ Check the finished answer for gaps before you write it. Nothing on screen should
 
 ### Record names
 
-- Show a deal's name without a trailing " - <date>" ending, everywhere it appears: tables, headings and typed actions. "Slack - Aug 31, 2026" shows as "Slack", "Update deal - Kestrel - Oct 12" as "Kestrel". Do this whether the name came from the deal record or from a task title.
+- Show a deal's name without a trailing " - <date>" ending, everywhere it appears: tables, headings and typed actions. "Northwind Expansion - Aug 31, 2026" shows as "Northwind Expansion", "Update deal - Acme - Oct 12" as "Acme". Do this whether the name came from the deal record or from a task title.
 - Record names are plain text, never links (section 4).
 
 ### Numbers
@@ -82,12 +82,13 @@ Check the finished answer for gaps before you write it. Nothing on screen should
 
 ## 5. Next actions (typed, never buttons)
 
-There are no buttons. The rep types what they want next, so every suggestion must be **specific**: it names the record, so it can't be confused with a row in another table. Write each typed action exactly as listed below, starting lowercase (*draft reply to Delta*, not *Draft reply to Delta*). Offer *prep me for…* only when a meeting with that record or person is coming up within the next 30 days (meeting-prep searches 30 days ahead for a named meeting).
+There are no buttons. The rep types what they want next, so every suggestion must be **specific**: it names the record, so it can't be confused with a row in another table. Write each typed action exactly as listed below, starting lowercase (*draft reply to Acme*, not *Draft reply to Acme*). Offer *prep me for…* only when a meeting with that record or person is coming up within the next 30 days (meeting-prep searches 30 days ahead for a named meeting).
 
-- **Tables of tasks or deals:** a last column **Next** with one action per row, in italics: `*draft reply to Northwind*`, `*prep me for Brightline*`, `*accept Kestrel close date*`.
+- **Tables of tasks or deals:** a last column **Next** with one action per row, in italics: `*draft reply to Northwind*`, `*prep me for Acme*`, `*accept Acme close date*`.
 - **One-record pages** (view-record, meeting-prep): one line at the end, `**What next?** Say *<action>* · *<action>*`, 2 or 3 actions, each naming the record or person the way a rep would say it (short meeting name and day, first names), most useful first.
 - **Other pages** that end with typed actions use the same wording: `**What next?** Say *…* · *…*`. Never "Next:" or "Want the full picture?".
 - **draft-email and update-record:** no **What next?** line.
+- **create-record:** after saving, one line `**What next?** Say *draft email to <contact>*`, plus *add a deal for <company>* only when the rep's own words mention a buying signal (create-record step 5); nothing else. When the person is already in Dreamteam: *update <contact>* · *view <contact>* if the input has new values, else *view <contact>* · *draft email to <contact>*.
 - Pick each action from what Dreamteam flags on that row (the task's type, a suggested change, a missing reply, a meeting today). Never a generic menu.
 
 ### The only actions a skill may offer
@@ -103,9 +104,10 @@ Offer only these. Never invent another action or wording that implies one.
 | *review <deal> change* (shows the change, saves nothing) | update-record |
 | *mark <deal> <task type> done* · *snooze <deal> <task type>* · *dismiss <deal> <task type>* | update-record |
 | *create the suggested deal* · *reject the suggested deal* (Dreamteam's new-deal suggestion) | update-record |
-| *add a note to <deal>* · *update <deal>* · *update <deal> close date* · *update <deal> amount* | update-record |
+| *add a note to <deal>* · *update <deal or contact>* · *update <deal> close date* · *update <deal> amount* | update-record |
 | *remind me <day> to <step> on <deal>* (a task for the rep's own internal work; the day the step names when it is after today, else the next weekday after today) | update-record |
 | *update close dates* (every passed close date the page counted) | update-record |
+| *add <name> as a contact* · *add a deal for <company>* (someone or something not yet in Dreamteam) | create-record |
 | *show all tasks* · *show overdue* · *show all deals* · *show gaps* · *show all contacts* | the same skill, expanded list |
 
 *dismiss* may be offered on any Recommended suggested task, whatever its type.
@@ -118,13 +120,13 @@ Show a pending suggested change (an Update Deal task, or any suggestion with a c
 
 | Deal | Change | Now → Suggested | Reason (Dreamteam) | Next |
 |:---:|:---:|:---:|:---:|:---:|
-| Kestrel | Close date | Oct 20 → Oct 30 | "Buyer moved the decision to month end" | *accept Kestrel close date* |
+| Acme | Close date | Oct 20 → Oct 30 | "Buyer moved the decision to month end" | *accept Acme close date* |
 
 - The reason is Dreamteam's own text (`ai_reco_rationale` or the suggestion's description), word for word, shortened only by cutting.
 - Never show the task's `confidence`, `composite_score` or `sort_rank`, and never describe them in words ("high confidence").
 - Accept and reject always go to update-record, which shows the confirm table and saves only after a yes.
 
-## 7. Confirm and done (update-record)
+## 7. Confirm and done (update-record, create-record)
 
 Before saving:
 
@@ -140,6 +142,7 @@ Reply **yes** to save, or tell me what to change.
 
 - A call recap may confirm several records at once: one table per record (note, deal, contact, task) under one "Reply **yes** to save".
 - A group action confirms at most 5 records at a time.
+- A new record (create-record) has columns **Field | New**, one table per record under a `####` heading with its name and type. An existing record it links to is one line, not a table: "Linked to Acme (already in Dreamteam)."
 
 After saving, one bullet per change: `- ✓ Close date → Oct 30` or `- ✗ Amount not saved: <reason>`, under `**Saved to Dreamteam**`.
 
@@ -147,7 +150,7 @@ After saving, one bullet per change: `- ✓ Close date → Oct 30` or `- ✗ Amo
 
 - No HTML, no widgets, no artifacts, no files, no images.
 - No links to Dreamteam pages (section 4).
-- No emoji except ✓ and ✗ in update-record results.
+- No emoji except ✓ and ✗ in update-record and create-record results.
 - No colour words standing in for status ("red", "green"), and no Red Flag / Amber / Green status anywhere. Say the fact: "2 days overdue". For qualification, name the areas not confirmed: "Pain, Champion not confirmed".
 - No code blocks, except the email body in draft-email.
 - No Confidence, Momentum, Risk, multi-threading, risk custom fields, risk details or risk ratings, on deals or tasks, and never use them to rank or pick items (see `reading-dreamteam.md`).

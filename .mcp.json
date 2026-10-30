@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dreamteam": {
+      "type": "http",
+      "url": "https://mcp.dreamteamcrm.ai/mcp"
+    }
+  }
+}

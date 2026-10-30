@@ -1,6 +1,6 @@
 # Reading Dreamteam CRM: shared rules for every skill
 
-Only the update-record skill changes Dreamteam, and only by section 7 "Changing data". Other skills never call a create, update or delete tool themselves: for a typed next action that changes data (accept, reject, mark done, update) or a change asked in words, they hand over to update-record.
+Only two skills change Dreamteam, and only by section 7 "Changing data": update-record changes records that already exist, and create-record adds new contacts, companies and deals. Other skills never call a create, update or delete tool themselves: for a typed next action that changes data (accept, reject, mark done, update) or a change asked in words, they hand over to update-record, and for a new contact, company or deal to create-record.
 
 ## 0. Before you start
 
@@ -33,7 +33,7 @@ Only the update-record skill changes Dreamteam, and only by section 7 "Changing 
 | Find records | `object_filter` | Groups are OR'd, filters inside a group are AND'd. Filter dropdowns on choice **id**, not label. |
 | One record | `object_get` | Full record, including AI fields. |
 | Linked records | `object_record_associations` | Returns ids only. Hydrate with `object_filter` (`id` IN [...]) or `object_get`. |
-| Change or create records | `object_update`, `object_create`, `task_reassign`, `task_reassign_targets` | **update-record only**, and only after the rep's yes. No other skill calls them. |
+| Change or create records | `object_update`, `object_create`, `task_reassign`, `task_reassign_targets` | **update-record and create-record only**, and only after the rep's yes. No other skill calls them. |
 
 `pipeline_list` and `pipeline_get` can fail with "Unknown object type: pipeline". Don't depend on them; stages carry `pipeline_id`.
 
@@ -213,18 +213,19 @@ Never assume the standard types are all there is.
 | The change a suggestion makes | task `description`, for example "Amount: 50000 (was 42000)" |
 | Questions for a contact | contact `ai_conversation_starters` |
 
-## 7. Changing data (update-record only)
+## 7. Changing data (update-record and create-record only)
 
-Every typed action that changes data and every change asked for in words goes through update-record and follows these rules.
+Every typed action that changes data and every change asked for in words goes through update-record (or create-record, for a new contact, company or deal) and follows these rules.
 
-**Writing depends on the rep's own Dreamteam permissions.** If the rep's connection allows it, update-record saves after the rep confirms. **When it doesn't** (no create or update tool is available, or a write is refused for permission): don't retry and don't look for another way. Show the change exactly as planned and say the rep can make it in Dreamteam.
+**Writing depends on the rep's own Dreamteam permissions.** If the rep's connection allows it, the skill saves after the rep confirms. **When it doesn't** (no create or update tool is available, or a write is refused for permission): don't retry and don't look for another way. Show the change exactly as planned and say the rep can make it in Dreamteam.
 
-update-record changes Dreamteam only when the rep types an action that changes data or asks for a change in words, and then replies yes to the confirm table. Never change data as a side effect of a question, or because another skill suggested it.
-1. **Read the record first** (`object_get`) and confirm it is the one meant. If more than one could match, ask which.
+update-record and create-record change Dreamteam only when the rep types an action that changes data or asks for a change in words, and then replies yes to the confirm table. Never change data as a side effect of a question, or because another skill suggested it.
+1. **Read the record first** (`object_get`) and confirm it is the one meant. If more than one could match, ask which. For a new record, search for it first, so nothing is created twice.
 2. **Check the field accepts the value** (`object_describe`). For a dropdown, write the choice **id**, never the label.
 3. **Show the change and wait.** Use the confirm table in `text-kit.md` section 7 (Field | Now | New, ending "Reply **yes** to save"). Write only after a yes.
-4. **One record at a time**, unless the rep asked for more. Two exceptions:
+4. **One record at a time**, unless the rep asked for more. Three exceptions:
    - A call recap may change several linked records (the note, deal, contact and task) in one confirmation, one table per record.
+   - A new contact may be added with its new company, a note and a deal in one confirmation, one table per record, at most 5 people at a time.
    - For a group action such as "Close all", first list every record and the count. One confirmation covers at most 5 records; for more, say how many are left and confirm the next 5 only when the rep asks again after the first save.
 5. **Never delete.** This plugin never deletes a record, even when the rep asks. To fix a mistake, correct the field. When the rep wants something removed, say Claude can't delete records and Dreamteam doesn't support deleting them. Never tell the rep to delete it in Dreamteam.
 6. **Read back and report.** After writing, read the record again and say what changed. If part of the change failed, say which part. Never call a partial change done.
