@@ -7,6 +7,11 @@
     "name": "Dreamteam AI"
   },
   "privacyPolicyUrl": "https://www.dreamteam.ai/privacy-policy",
+  "homepage": "https://www.dreamteam.ai",
+  "repository": "https://github.com/dreamteamaiinc/claude-connector",
+  "supportUrl": "https://support.dreamteam.ai/",
+  "termsOfServiceUrl": "https://www.dreamteam.ai/terms-of-service",
+  "documentationUrl": "https://support.dreamteam.ai/articles/1397438038-installing-dreamteam-sales-plugin-in-claude",
   "keywords": [
     "dreamteam",
     "dreamteam-crm",
