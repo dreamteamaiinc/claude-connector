@@ -1,8 +1,8 @@
-# Dreamteam Sales
+# Dreamteam CRM
 
 Ask Claude about your Dreamteam CRM in plain words: your day, your pipeline, your next meeting, or one deal, contact or company. Claude answers from your Dreamteam workspace, drafts follow-up emails, and adds or updates records after you confirm.
 
-Dreamteam Sales connects only to Dreamteam, through the Dreamteam CRM connector (`https://mcp.dreamteamcrm.ai/mcp`), and sees only what your Dreamteam role allows. It stores nothing, changes records only after you reply **yes**, never deletes records and never sends email.
+Dreamteam CRM connects only to Dreamteam, through its Dreamteam connector (`https://mcp.dreamteamcrm.ai/mcp`), and sees only what your Dreamteam role allows. It stores nothing, changes records only after you reply **yes**, never deletes records and never sends email.
 
 ## What's inside
 
@@ -21,11 +21,11 @@ Most answers end with short next steps you can type, such as *draft reply to Nor
 
 ## Get started
 
-1. Add Dreamteam Sales from the directory: **Customize → Plugins → Discover**, select **Dreamteam Sales**, then **Add**.
-2. Open the plugin's **Connectors** tab and connect **Dreamteam CRM**. Sign in with your Dreamteam account. There's no API key to set up. On Team and Enterprise plans, an Owner adds the connector for the organization first.
+1. Add Dreamteam CRM from the directory: **Customize → Plugins → Discover**, select **Dreamteam CRM**, then **Add**.
+2. Open the plugin's **Connectors** tab and connect the **Dreamteam** connector. Sign in with your Dreamteam account. There's no API key to set up. On Team and Enterprise plans, an Owner adds the connector for the organization first.
 3. Start a new chat and ask "Brief me on my day".
 
-We recommend these tool permissions under **Customize → Connectors → Dreamteam CRM**: read tools **Always allow**, `object_create`, `object_update` and `task_reassign` **Needs approval**, and `object_delete` and `object_batch` **Blocked**. Dreamteam Sales never uses the last two. To revoke access, disconnect Dreamteam CRM there.
+We recommend these tool permissions under **Customize → Connectors → Dreamteam**: read tools **Always allow**, `object_create`, `object_update` and `task_reassign` **Needs approval**, and `object_delete` and `object_batch` **Blocked**. The plugin never uses the last two. To revoke access, disconnect the Dreamteam connector there.
 
 ## Support and license
 
