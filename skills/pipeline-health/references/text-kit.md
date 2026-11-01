@@ -123,7 +123,7 @@ Show a pending suggested change (an Update Deal task, or any suggestion with a c
 | Acme | Close date | Oct 20 → Oct 30 | "Buyer moved the decision to month end" | *accept Acme close date* |
 
 - The reason is Dreamteam's own text (`ai_reco_rationale` or the suggestion's description), word for word, shortened only by cutting.
-- Never show the task's `confidence`, `composite_score` or `sort_rank`, and never describe them in words ("high confidence").
+- Never use or show a banned field (`reading-dreamteam.md`, section 6).
 - Accept and reject always go to update-record, which shows the confirm table and saves only after a yes.
 
 ## 7. Confirm and done (update-record, create-record)
@@ -153,7 +153,7 @@ After saving, one bullet per change: `- ✓ Close date → Oct 30` or `- ✗ Amo
 - No emoji except ✓ and ✗ in update-record and create-record results.
 - No colour words standing in for status ("red", "green"), and no Red Flag / Amber / Green status anywhere. Say the fact: "2 days overdue". For qualification, name the areas not confirmed: "Pain, Champion not confirmed".
 - No code blocks, except the email body in draft-email.
-- No Confidence, Momentum, Risk, multi-threading, risk custom fields, risk details or risk ratings, on deals or tasks, and never use them to rank or pick items (see `reading-dreamteam.md`).
+- Never use or show a banned field (`reading-dreamteam.md`, section 6).
 - No footer lines and no source tags.
 - No empty columns, empty tables, sections with a count of 0, or placeholder text (section 2, Empty cells, columns and sections).
 - No summary, analysis or advice of your own, and no "Next:" lines (use **What next?** or the skill's last line).

@@ -183,6 +183,6 @@ Run the skill text-kit section 5 names for that record. Claude remembers what th
 - The Today heading's count matches the rows shown, plus the "more due today" line, and counts only eligible tasks. No meeting shows in both Today and Meetings ahead, and no deal or person shows twice in one table.
 - In the rep's own brief, the rep's name never appears in a Why cell.
 - No blank first column, no all-blank column, no heading with a count of 0 or nothing under it, and no deal name with a " - <date>" ending.
-- No assistant names, record ids or UTC times on screen. Never show a task's `confidence`, `composite_score` or `sort_rank`, describe them in words, or use them to pick or order tasks.
+- No assistant names, record ids or UTC times on screen. Never use or show a banned field (reading rules, section 6).
 - Every task, reason and name comes from Dreamteam: task titles, descriptions, rationales, the brief's goal and field values. No advice or guesses of Claude's own.
 - One Markdown answer, about 30 lines, and nothing after the last line.

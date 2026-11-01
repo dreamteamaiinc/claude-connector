@@ -5,7 +5,7 @@ Only two skills change Dreamteam, and only by section 7 "Changing data": update-
 ## 0. Before you start
 
 1. **Connector check.** These skills need the Dreamteam CRM connector. Call `user_me` first. Its tools may appear with a prefix, for example "Dreamteam CRM: user_me".
-   - If no Dreamteam tool is available, or `user_me` fails, stop and say: "Connect Dreamteam CRM in this plugin's Connectors tab (or Settings → Connectors), then ask again."
+   - If no Dreamteam tool is available, or `user_me` fails, stop and say: "Connect the Dreamteam connector in this plugin's Connectors tab (or Customize → Connectors), then ask again."
    - Never answer from memory or guess data.
 2. **No links.** Never build URLs or hyperlinks to Dreamteam. Show records by name, as plain text. Never print a bare id. To see a record in the chat, the rep types *view <deal, contact or company>* (`text-kit.md`, section 5).
 3. **Time zone, from Dreamteam.** Never ask the user for it. Take it from the rep's own calendar:
@@ -78,17 +78,17 @@ Open stages = `is_closed` false. Weighted value = `amount × win_probability / 1
 | `name`, `amount`, `stage_id`, `owner_id`, `expected_close_date` | Core. `amount` 0 or empty = unpriced. |
 | `forecast_category` | Committed / Best-case / Pipeline (rep-set). |
 | `last_activity_date`, `next_activity_date` | System-set. Empty `next_activity_date` = no scheduled next step. |
-| `status` | Red Flag (0–40) / Amber (41–70) / Green Flag (71–100) from the qualification score. **Never show it** or any colour word for it. Show the unconfirmed qualification areas instead, for example "Pain, Champion not confirmed". |
+| `status` | Red Flag (0–40) / Amber (41–70) / Green Flag (71–100) from the qualification score. A banned field (section 6). Show the unconfirmed qualification areas instead, for example "Pain, Champion not confirmed". |
 | `ai_deal_qualification` | Methodology scorecard. `qualification_framework.components[]` each with `title`, `score`, `status` (Confirmed / Partial / Unknown), and `items[]` with `captured`, `statement`, `gap`, and `source` (`type`, `activity_id`, `contact_name`). **Use `source` to know who said what** (buyer or seller). |
 | `has_gaps?` | True when any criterion is a gap. |
 | `next_steps` | JSON: `agreed_next_steps` (buyer-confirmed) and `inferred_next_steps` (AI suggestion). Keep them apart; an inferred step shown as a step starts "Suggested (Dreamteam): ". |
 | `ai_exec_summary`, `ai_deal_debrief` | AI narrative. Use for context, never as the only evidence for a claim about the buyer. |
-| `risk`, `confidence`, `momentum`, `multi_threading` | AI assessments (High/Medium/Low; Accelerating/Steady/Stalled/Regressing; Single-thread/Emerging/Effective). May be empty. **Never shown and never used to rank or pick items** (section 6). |
+| `risk`, `confidence`, `momentum`, `multi_threading` | AI assessments (High/Medium/Low; Accelerating/Steady/Stalled/Regressing; Single-thread/Emerging/Effective). May be empty. Banned fields (section 6). |
 | `ai_recommended_stage`, `stage_mismatched?`, `ai_recommended_stage_rationale` | AI's view of the right stage (a `stage_order` number). |
 | `objections` | Multi-select of objection themes. |
 | `company_ids`, `contact_ids` | Linked records. |
 
-Some workspaces add custom fields (for example a `lead_source` dropdown). Use them when present; never fail when absent. A custom field about risk, confidence or momentum (such as a `deal_risk` multi-select) follows the same rule as `risk`: never shown, never used to rank or pick.
+Some workspaces add custom fields (for example a `lead_source` dropdown). Use them when present; never fail when absent. A custom field about risk, confidence or momentum (such as a `deal_risk` multi-select) is a banned field (section 6).
 
 ### Contact
 `first_name`, `last_name`, `email`, `job_title`, `buying_role` (Decision Maker, Economic Buyer, Champion, Influencer, Technical Buyer, End User, Procurement, Legal/Compliance, Executive Sponsor, Blocker), `contact_activity_status` (None / New / Working / Connected / Meeting booked / Qualified / Disqualified), `engagement`, `last_activity_date`, `ai_exec_summary`, `ai_research_brief_summary`, `ai_conversation_starters`. Some workspaces add `sentiment` and `ad_seen_before_converting` (the ad or search that brought them in; never shown on a page).
@@ -163,7 +163,13 @@ Never assume the standard types are all there is.
 
 - Every skill answers in Markdown text. `text-kit.md` decides how it looks. These rules decide what it says.
 - **Never show a line about single-threading, multi-threading or stakeholder coverage** ("Deal is single-threaded to the CEO"), even when Dreamteam's debrief, summary or brief says it.
-- **Never show** deal `confidence`, `momentum`, `risk`, `multi_threading`, any risk custom field, any risk details or risk rating, the deal `status` colour (Red Flag / Amber / Green Flag), or a task's `confidence`, `composite_score` or `sort_rank`. Never describe them in words either ("high confidence"), and never use them to rank or pick items.
+- **Banned fields.** This is the one list. Every skill and `text-kit.md` refer to it. Never show these fields, never describe them in words ("high confidence"), and never use them to rank or pick items:
+  - on deals: `confidence`, `momentum`, `risk`, `multi_threading` and the `status` colour (Red Flag / Amber / Green Flag)
+  - any custom field about risk, confidence or momentum, and any risk details field, for example `deal_risk`, `risk_details` or `risk_signal`
+  - any risk rating, for example `risk_tag`, `chips.risk` or a debrief's `status`
+  - on tasks: `confidence`, `composite_score` and `sort_rank`
+
+  A risk statement inside `ai_deal_debrief` is narrative text, not a banned field. A skill may show its text, but never its rating.
 - Lead with the answer or the one thing to do. Detail after.
 - Use the user's names for things: stage names, people's names, company names. No ids in the body; use the record's name.
 - **The rep is "you" everywhere in the body text**, including owner columns and Dreamteam's own text. Teammates go by first name.
@@ -227,7 +233,7 @@ update-record and create-record change Dreamteam only when the rep types an acti
    - A call recap may change several linked records (the note, deal, contact and task) in one confirmation, one table per record.
    - A new contact may be added with its new company, a note and a deal in one confirmation, one table per record, at most 5 people at a time.
    - For a group action such as "Close all", first list every record and the count. One confirmation covers at most 5 records; for more, say how many are left and confirm the next 5 only when the rep asks again after the first save.
-5. **Never delete.** This plugin never deletes a record, even when the rep asks. To fix a mistake, correct the field. When the rep wants something removed, say Claude can't delete records and Dreamteam doesn't support deleting them. Never tell the rep to delete it in Dreamteam.
+5. **Never delete.** This plugin never deletes a record, even when the rep asks. To fix a mistake, correct the field. When the rep wants something removed, reply with exactly: "Claude can't delete records. You can delete it in Dreamteam."
 6. **Read back and report.** After writing, read the record again and say what changed. If part of the change failed, say which part. Never call a partial change done.
 7. **Refuse:**
    - a bulk change when the rep hasn't seen the list

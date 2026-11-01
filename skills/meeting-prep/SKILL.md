@@ -16,8 +16,7 @@ Before anything else, read these two files in this skill's folder and follow the
 - **Dreamteam's own content first.** Every line comes from a Dreamteam record: field values, Dreamteam's meeting brief, its suggestions, its deal summary, emails and meetings. Claude picks, orders and shortens; it doesn't reword. Only two kinds of own line are allowed, each marked **Suggested by Claude**, and only when the meeting has no Dreamteam brief: one Goal line, and up to 3 questions in Ask in the call. Nowhere else.
 - **Never guess.** No "likely", no inferred statuses, no advice of Claude's own.
 - **Deal-impacting content only.** Leave out logistics: reschedules, who sent or accepted the invite, join details, attendance.
-- **Never use or show these deal fields:** `confidence`, `momentum`, `risk`, any risk details field (for example `deal_risk`), and the risk rating on Dreamteam's brief or deal summary (`chips.risk`, `risk_tag`). Risk statements in `ai_deal_debrief` are narrative text, not the risk field: show their text, never their rating.
-- **Never show** a task's `confidence`, `composite_score` or `sort_rank`.
+- **Never use or show a banned field** (reading rules, section 6).
 - **Never show** `meeting_info`, `description`, `meeting_url`, phone numbers or passcodes from a meeting.
 - **Meetings that haven't happened:** ignore `ai_meeting_summary`, `ai_meeting_highlights` and `ai_meeting_post_brief` (they can describe an earlier slot).
 - Never ask the user anything before showing the answer.
@@ -164,6 +163,6 @@ Claude remembers what the answer showed, so the name is enough.
 - No source tags on screen. Claude knows each line's source and says it only when asked.
 - No footer lines; a gap is mentioned only inside the section it changes.
 - No reschedules, invite details, join links or passcodes.
-- No `confidence`, `momentum`, `risk`, risk details or risk ratings; no task `confidence`, `composite_score` or `sort_rank`.
+- No banned field (reading rules, section 6).
 - No names of Dreamteam's internal assistants, no record ids, no UTC times on screen. The **Suggested by Claude** label always stays.
 - One answer, about 30 lines at most.

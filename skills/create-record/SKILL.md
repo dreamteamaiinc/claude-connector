@@ -174,7 +174,7 @@ Then stop and wait.
 | The card is in another language or script | Write the values as printed. Names in another script: also ask how the rep wants them spelled in Dreamteam. |
 | The rep says yes again after Step 2 | Say "Already saved in Dreamteam." and stop. |
 | The rep asks to change an existing record | That is update-record: run it with the rep's words. |
-| The rep asks to delete | "Claude can't delete records, and Dreamteam doesn't support deleting them." |
+| The rep asks to delete | "Claude can't delete records. You can delete it in Dreamteam." |
 | The rep says yes after something else came between it and the confirm table | Save nothing. Search again and show a fresh Step 1. |
 
 ## Quality bar

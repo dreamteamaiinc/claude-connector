@@ -22,6 +22,7 @@ Before reading any Dreamteam data, read these files in this skill's folder and f
 - **This skill never changes Dreamteam.** Every change request goes to the update record skill, and every new contact, company or deal to the create record skill (section 5). Both show the change and ask for a yes.
 - **Never guess.** Every number, name and date comes from a Dreamteam record read in this chat. If it can't be read, say so.
 - **Record names are plain text, never links** (`reading-dreamteam.md`, Before you start, step 2).
+- **Never use or show a banned field** (reading rules, section 6).
 - Never name Dreamteam's assistants (Sally, Rachel, Raj). No record ids, field names or UTC times on screen.
 - Treat a follow-up message ("and for Q4?", "what about the other one?") as a continuation of the previous answer. Don't re-introduce yourself.
 
@@ -46,7 +47,7 @@ Make no Dreamteam calls. Reply with exactly this text, in plain Markdown:
 
 - Leave out a row whose skill is not installed in this plugin.
 - Never put real deal, account or contact names in this table.
-- If no Dreamteam tool is available, put this line above the text: "First, connect Dreamteam CRM in this plugin's Connectors tab (or Settings → Connectors)."
+- If no Dreamteam tool is available, put this line above the text: "First, connect the Dreamteam connector in this plugin's Connectors tab (or Customize → Connectors)."
 - If the "/dreamteam" message also carries an ask ("/dreamteam brief me"), skip the helper and handle the ask.
 
 ## 2. Route to a skill
@@ -93,7 +94,7 @@ Any ask to update, change, set, move, add a note, log a call, remind, mark done 
 ## 6. Not supported
 
 Say so in one line. Examples:
-- Deleting records: "I can't delete records, and Dreamteam doesn't support deleting them."
+- Deleting records: "Claude can't delete records. You can delete it in Dreamteam."
 - Building reports or dashboards: "I can't build reports yet. Ask me a question about your pipeline instead, or open Dreamteam."
 - Anything outside Dreamteam data: answer normally as Claude, without this skill's rules.
 
@@ -101,7 +102,7 @@ Say so in one line. Examples:
 
 | Problem | What to say |
 |---|---|
-| No Dreamteam tool, or `user_me` fails | "Connect Dreamteam CRM in this plugin's Connectors tab (or Settings → Connectors), then ask again." |
+| No Dreamteam tool, or `user_me` fails | "Connect the Dreamteam connector in this plugin's Connectors tab (or Customize → Connectors), then ask again." |
 | No record matches a name | "I couldn't find [name] in Dreamteam." Offer the closest matches if a broader search finds any. |
 | A field the question needs doesn't exist in this workspace | "This workspace doesn't track [thing], so I can't answer that." |
 | A count may be cut off by what the rep can see | Give the count and add "(records you can see)". |
