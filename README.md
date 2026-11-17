@@ -21,7 +21,11 @@ Most answers end with short next steps you can type, such as *draft reply to Nor
 
 ## Get started
 
-1. Add Dreamteam CRM from the directory: **Customize → Plugins → Discover**, select **Dreamteam CRM**, then **Add**.
+1. Add Dreamteam CRM from the directory: **Customize → Plugins → Discover**, select **Dreamteam CRM**, then **Add**. In Claude Code, run:
+
+   ```
+   /plugin install dreamteam-crm --marketplace anthropics/claude-plugins-official
+   ```
 2. Open the plugin's **Connectors** tab and connect the **Dreamteam** connector. Sign in with your Dreamteam account. There's no API key to set up. On Team and Enterprise plans, an Owner adds the connector for the organization first.
 3. Start a new chat and ask "Brief me on my day".
 
